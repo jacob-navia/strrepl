@@ -1,0 +1,3 @@
+*.o
+strrepl-c
+strrepl-cpp
