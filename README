@@ -1,0 +1,28 @@
+Here is the first implementation of strrepl. 
+
+You call it once to figure out the length needed and the second time to do the replacements
+
+You can access the code with
+
+git clone https://www.github.com/jacob-navia/strrepl
+
+
+For the tests I used the bible.txt from
+
+https://github.com/mxw/grmr/blob/master/src/finaltests/bible.txt
+
+The compilation is:
+gcc -O2 -o strrepl-c strrepl.c
+
+For C++
+g++ -O2 -o strrepl-cpp strrepl.cpp
+
+ANd the test is:
+
+time ./strrepl-c bible.txt lived LIVEDFOREVER out-c
+time ./strrepl.cpp bible.txt lived LIVEDFOREVER out-cpp
+
+DISCLAIMER:
+This is a first version full of bugs.
+
+The code for the cpp version was contributed by Bonita Montero
