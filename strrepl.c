@@ -33,7 +33,7 @@ int strrepl(char *InputString,char *StringToFind,char *StringToReplace,char *out
 	for (offset = InputString; *offset; offset++) {
 		if (FirstChar == *offset && !strncmp(offset,StringToFind,findlen)) {
 			if (output == NULL) {
-				result += insertlen;result -= findlen;
+				result += insertlen - findlen;
 				offset += findlen;
 				continue;
 			}
