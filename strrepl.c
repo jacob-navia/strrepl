@@ -157,7 +157,7 @@ int strrepl(char *InputString,char *StringToFind,char *StringToReplace,char *out
 }
 #elif 0
 /* 
-This version was contributed by Ben Bacarisse. It merges the two passes of the above version into one. In this machine
+This version merges the two passes of the above version into one. In this machine
 it suffers from the bad performance of strstr.
 jacob@rock64:~/strrepl$ time ./strrepl-c bible.txt lived LIVEDFOREVER kk
 real	0m3.283s
@@ -180,7 +180,7 @@ int strrepl(const char *in, const char *pat, const char *rep, char *out)
      return len + rest;
 } 
 #elif 1
-/* This version is the version of Mr Bacarisse modified to be more performant in a linux
+/* This version is the version above modified to be more performant in a linux
 ARM 64 system. It replaces strstr with strncmp and makes some changes to improve
 performance in this system. This version is the fastest in this system.
 jacob@rock64:~/strrepl$ time ./strrepl-c bible.txt lived LIVEDFOREVER kk
@@ -202,7 +202,7 @@ int strrepl(const char *in, const char *pat, const char *rep, char *out)
 	          len += next - src;
 	          memcpy(out + len, rep, replen);
 	          len += replen;
-	          src = next = next + patlen;
+	          src = next = next + patlen-1;
 			}
 	     }
 	}
