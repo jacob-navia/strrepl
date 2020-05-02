@@ -210,7 +210,7 @@ int strrepl(const char *in, const char *pat, const char *rep, char *out)
 	     for (next = src; *next;next++) {
 				if (FirstChar == *next && strncmp(next,pat,patlen) == 0) {
 	          	len++;
-	          	next += patlen;
+	          	next += patlen-1;
 			}
 	     }
 		 return (next - src) + (replen-patlen)*len;
