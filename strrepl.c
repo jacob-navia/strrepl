@@ -202,7 +202,8 @@ int strrepl(const char *in, const char *pat, const char *rep, char *out)
 	          len += next - src;
 	          memcpy(out + len, rep, replen);
 	          len += replen;
-	          src = next = next + patlen-1;
+	          next = next + patlen-1;
+			  src = next+1;
 			}
 	     }
 	}
@@ -210,7 +211,7 @@ int strrepl(const char *in, const char *pat, const char *rep, char *out)
 	     for (next = src; *next;next++) {
 				if (FirstChar == *next && strncmp(next,pat,patlen) == 0) {
 	          	len++;
-	          	next += patlen-1;
+	          	next += patlen;
 			}
 	     }
 		 return (next - src) + (replen-patlen)*len;
