@@ -187,17 +187,22 @@ jacob@rock64:~/strrepl$ time ./strrepl-c bible.txt lived LIVEDFOREVER kk
 real	0m1.778s
 user	0m1.731s
 sys	0m0.047s
+After introducing the LastChar speedup this changes to:
+real	0m1.517s
+user	0m1.473s
+sys	0m0.042s
 */
 int strrepl(const char *in, const char *pat, const char *rep, char *out)
 {
      int patlen = Strlen(pat), replen = Strlen(rep), len = 0;
-	int FirstChar = *pat;
+	int patlenm1=patlen-1;
+	int FirstChar = *pat,LastChar = pat[patlenm1];;
      const char *src = in, *next;
 
 	if (patlen == 0) return 0;
 	if (out) {
 	     for (next = src; *next;next++) {
-			if (FirstChar == *next && strncmp(next,pat,patlen) == 0) {
+			if (FirstChar == *next && LastChar == next[patlenm1] && strncmp(next,pat,patlen) == 0) {
 	          memcpy(out + len, src, next - src);
 	          len += next - src;
 	          memcpy(out + len, rep, replen);
@@ -209,7 +214,7 @@ int strrepl(const char *in, const char *pat, const char *rep, char *out)
 	}
     else {
 	     for (next = src; *next;next++) {
-				if (FirstChar == *next && strncmp(next,pat,patlen) == 0) {
+				if (FirstChar == *next && LastChar == next[patlenm1] && strncmp(next,pat,patlen) == 0) {
 	          	len++;
 	          	next += patlen;
 			}
